@@ -1,0 +1,12 @@
+git add .
+
+git commit -m 'add icons'
+
+git push
+
+git checkout master
+
+git merge origin/index-icons
+
+git push
+
