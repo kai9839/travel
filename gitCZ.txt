@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// 提交
+>>>>>>> origin/index-recommend
 git add .
 
 git commit -m 'add icons'
@@ -10,3 +14,8 @@ git merge origin/index-icons
 
 git push
 
+<<<<<<< HEAD
+=======
+// 写
+
+>>>>>>> origin/index-recommend
