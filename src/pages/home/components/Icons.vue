@@ -1,6 +1,6 @@
 <template>
     <div class="icons">
-        <swiper>
+        <swiper :options="swiperOption">
             <swiper-slide v-for="(page, index) of pages" :key="pages.index">
                 <div class="icon" v-for="item of page" :key="item.id">
                     <div class="icon-img">
@@ -15,47 +15,57 @@
 <script>
 export default {
     name: 'HomeIcons',
+    props: {
+        list: Array
+    },
     data() {
         return {
-            iconList: [{
-                id: '0001',
-                imgUrl: 'https://imgs.qunarzz.com/vc/fd/55/94/6c7152c2a8b35a9c49bb26ea25.png_92.png',
-                desc: '主题游'
-            }, {
-                id: '0003',
-                imgUrl: 'https://imgs.qunarzz.com/vc/eb/d9/1b/e24bca3f1ef6ae6ebdee15e4ca.png_92.png',
-                desc: '徒步登山'
-            }, {
-                id: '0004',
-                imgUrl: 'https://imgs.qunarzz.com/vc/c8/01/32/8f6e29b7b6ce0a807742c2587a.png_92.png',
-                desc: '深度探险'
-            }, {
-                id: '0005',
-                imgUrl: 'https://imgs.qunarzz.com/vc/c3/f2/54/2e1c8f9403de1ed28895c9ffa4.png_92.png',
-                desc: '亲自游学'
-            }, {
-                id: '0006',
-                imgUrl: 'https://imgs.qunarzz.com/vc/fd/55/94/6c7152c2a8b35a9c49bb26ea25.png_92.png',
-                desc: '景点门票'
-            }, {
-                id: '0007',
-                imgUrl: 'https://imgs.qunarzz.com/vc/eb/d9/1b/e24bca3f1ef6ae6ebdee15e4ca.png_92.png',
-                desc: '景点门票'
-            }, {
-                id: '0008',
-                imgUrl: 'https://imgs.qunarzz.com/vc/c3/f2/54/2e1c8f9403de1ed28895c9ffa4.png_92.png',
-                desc: '景点门票'
-            }, {
-                id: '0009',
-                imgUrl: 'https://imgs.qunarzz.com/vc/fd/55/94/6c7152c2a8b35a9c49bb26ea25.png_92.png',
-                desc: '换页'
-            }]
+            swiperOption: {
+                autoplay: false
+            }
+            // iconList: [{
+            //     id: '0001',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/fd/55/94/6c7152c2a8b35a9c49bb26ea25.png_92.png',
+            //     desc: '主题游'
+            // }, {
+            //     id: '0003',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/eb/d9/1b/e24bca3f1ef6ae6ebdee15e4ca.png_92.png',
+            //     desc: '徒步登山'
+            // }, {
+            //     id: '0004',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/c8/01/32/8f6e29b7b6ce0a807742c2587a.png_92.png',
+            //     desc: '深度探险'
+            // }, {
+            //     id: '0005',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/c3/f2/54/2e1c8f9403de1ed28895c9ffa4.png_92.png',
+            //     desc: '亲自游学'
+            // }, {
+            //     id: '0006',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/fd/55/94/6c7152c2a8b35a9c49bb26ea25.png_92.png',
+            //     desc: '景点门票'
+            // }, {
+            //     id: '0007',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/eb/d9/1b/e24bca3f1ef6ae6ebdee15e4ca.png_92.png',
+            //     desc: '景点门票'
+            // }, {
+            //     id: '0008',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/c3/f2/54/2e1c8f9403de1ed28895c9ffa4.png_92.png',
+            //     desc: '景点门票'
+            // }, {
+            //     id: '0009',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/fd/55/94/6c7152c2a8b35a9c49bb26ea25.png_92.png',
+            //     desc: '换页'
+            // }, {
+            //     id: '0009',
+            //     imgUrl: 'https://imgs.qunarzz.com/vc/fd/55/94/6c7152c2a8b35a9c49bb26ea25.png_92.png',
+            //     desc: '换页'
+            // }]
         }
     },
     computed: {
         pages() {
             const pages = []
-            this.iconList.forEach((item, index) => {
+            this.list.forEach((item, index) => {
                 const page = Math.floor(index / 8)
                 if (!pages[page]) {
                     pages[page] = []
