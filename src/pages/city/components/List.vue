@@ -1,18 +1,22 @@
+<!--这是全国城市列表页-->
+<!--需求：根据后台数据显示城市列表，能够动态滚动，自动根据内容排版，有按照拼音分组输出-->
+<!--难点：数据动态获取，从父组件获取，列表动态分组渲染-->
+
 <template>
     <div class="list" ref="wrapper">
         <div>
             <div class="area">
-                <div class="title border-topbottom">当前城市</div>
+                <div class="title border-topbottom" @click="aaa()">当前城市</div>
                 <div class="button-list">
                     <div class="button-wrapper">
-                        <div class="button">北京</div>
+                        <div class="button">{{ this.currentCity }}</div>
                     </div>
                 </div>
             </div>
             <div class="area">
                 <div class="title border-topbottom">热门城市</div>
                 <div class="button-list">
-                    <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                    <div class="button-wrapper" v-for="item of hot" :key="item.id" @click="handleCityClick(item.name)">
                         <div class="button">{{ item.name }}</div>
                     </div>
                 </div>
@@ -20,7 +24,8 @@
             <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
                 <div class="title border-topbottom">{{ key }}</div>
                 <ul class="item-list">
-                    <li class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">
+                    <li class="item border-bottom" v-for="innerItem of item" :key="innerItem.id"
+                        @click="handleCityClick(innerItem.name)">
                         {{ innerItem.name }}
                     </li>
                 </ul>
@@ -32,6 +37,8 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
+
 export default {
     name: 'CityList',
     props: {
@@ -39,8 +46,18 @@ export default {
         cities: Object,
         letter: String
     },
-    mounted() {
-        this.scroll = new Bscroll(this.$refs.wrapper);
+    computed: {
+        ...mapState({
+            currentCity: 'city'
+        })
+    },
+    methods: {
+        handleCityClick(city) {
+            this.$store.commit('changeCity', city)
+            this.changeCity(city)
+            this.$router.push('/')
+        },
+        ...mapMutations(['changeCity'])
     },
     watch: {
         letter() {
@@ -49,6 +66,9 @@ export default {
                 this.scroll.scrollToElement(element)
             }
         }
+    },
+    mounted() {
+        this.scroll = new Bscroll(this.$refs.wrapper);
     }
 }
 </script>

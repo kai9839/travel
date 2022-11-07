@@ -1,48 +1,51 @@
 <template>
     <div>
-        <HomeHeader :city="city"></HomeHeader>
-        <HomeSwiper :list='swiperList'></HomeSwiper>
-        <HomeIcons :list='iconList'></HomeIcons>
-        <RecommendIcons :list="recommendList"></RecommendIcons>
-        <WeekendIcons :list="weekendList"></WeekendIcons>
+        <!--使用子组件-->
+        <home-header></home-header>
+        <home-swiper :list="swiperList"></home-swiper>
+        <home-icons :list="iconList"></home-icons>
+        <home-recommend :list="recommendList"></home-recommend>
+        <home-weekend :list="weekendList"></home-Weekend>
     </div>
 </template>
 
 <script>
+//	引入header组件
 import HomeHeader from './components/Header.vue'
+//	引入轮播图HomeSwiper组件
 import HomeSwiper from './components/Swiper.vue'
 import HomeIcons from './components/Icons.vue'
-import RecommendIcons from './components/Recommend.vue'
-import WeekendIcons from './components/Weekend.vue'
+import HomeRecommend from './components/Recommend.vue'
+import HomeWeekend from './components/Weekend.vue'
 import axios from 'axios'
 export default {
     name: 'Home',
+    //		使用了子组件需要在此先声明
     components: {
+        //			在ES6中,对象的键和值相等可以省略值.
+        //			HomeHeader:HomeHeader
         HomeHeader,
         HomeSwiper,
         HomeIcons,
-        RecommendIcons,
-        WeekendIcons
+        HomeRecommend,
+        HomeWeekend
     },
     data() {
         return {
-            city: '',
             swiperList: [],
             iconList: [],
             recommendList: [],
-            weekendList: [],
+            weekendList: []
         }
     },
     methods: {
         getHomeInfo() {
-            axios.get('/api/index.json')
-                .then(this.getHomeInfoSucc)
+            axios.get('./api/index.json').then(this.getHomeInfoSucc)
         },
         getHomeInfoSucc(res) {
-            res = res.data
+            res = res.data;
             if (res.ret && res.data) {
                 const data = res.data;
-                this.city = data.city;
                 this.swiperList = data.swiperList;
                 this.iconList = data.iconList;
                 this.recommendList = data.recommendList;
@@ -52,10 +55,10 @@ export default {
     },
     mounted() {
         this.getHomeInfo()
-    },
+    }
 }
 </script>
 
-<style lang="stylus" scoped>
+<style>
 
 </style>
