@@ -6,7 +6,7 @@
             <div class="banner-info">
                 <div class="banner-title">流溪河国家森林公园</div>
                 <div class="banner-number">
-                    <span class="iconfont banner-icon">&#xe632;</span>8
+                    <span class="iconfont banner-icon">&#xec7f;</span>8
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
 <script>
 import CommonGallary from 'common/gallary/Gallary.vue'
 export default {
-    name: 'Banner',
+    name: 'DetailBanner',
     components: {
         CommonGallary
     },
