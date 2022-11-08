@@ -1,16 +1,16 @@
 <template>
     <div>
         <div class="banner" @click="handleBannerClick">
-            <img class="banner-img"
-                src="//img1.qunarzz.com/sight/p0/1603/50/50309ba1d90e4e3290.water.jpg_600x330_acaaf06b.jpg" />
+            <img class="banner-img" :src="bannerImg" />
             <div class="banner-info">
-                <div class="banner-title">流溪河国家森林公园</div>
+                <div class="banner-title">{{  this.sightName  }}</div>
                 <div class="banner-number">
-                    <span class="iconfont banner-icon">&#xec7f;</span>8
+                    <span class="iconfont banner-icon">&#xe632;</span>
+                    {{  this.bannerImgs.length  }}
                 </div>
             </div>
         </div>
-        <CommonGallary :imgs='imgs' v-show='showGallary' @close='handleGallaryClose'></CommonGallary>
+        <common-gallary :imgs='bannerImgs' v-show='showGallary' @close='handleGallaryClose'></common-gallary>
     </div>
 </template>
   
@@ -23,10 +23,13 @@ export default {
     },
     data() {
         return {
-            showGallary: false,
-            imgs: ['http://img1.qunarzz.com/sight/p0/1603/50/50309ba1d90e4e3290.water.jpg_r_800x800_3e120f4a.jpg',
-                'http://img1.qunarzz.com/sight/p0/1411/4f/aa1e6d34bc8ccdea819bfdb16ac49855.water.jpg_r_800x800_45caf40a.jpg']
+            showGallary: false
         }
+    },
+    props: {
+        sightName: String,
+        bannerImg: String,
+        bannerImgs: Array
     },
     methods: {
         handleBannerClick() {
@@ -71,3 +74,4 @@ export default {
         .banner-icon
           font-size .24rem
 </style>
+  
